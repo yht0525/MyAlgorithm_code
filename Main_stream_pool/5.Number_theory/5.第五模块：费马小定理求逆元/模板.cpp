@@ -5,7 +5,7 @@ const int N = 1e5+10;
 //费马小定理：if( gcd(a,p)==1 ) -> a^(p-1) = 1(mod(p))  条件：p是质数且a,p互质
 //                                  "同余->模一个数相同"
 
-//注意：使用费马小定理的时候条件一定是a,b互质！！！
+//注意：使用费马小定理的时候条件一定是a,b互质！！！,且p是质数
 
 int a,b,p,cnt;
 int st[N];
@@ -30,7 +30,7 @@ int gcd(int a,int b)
     return gcd(b,a%b);
 }
 
-int get_divide_ret()
+int get_divide_ret()            //快速幂
 {
     int k = p-2;
     int ant = 1;
@@ -44,7 +44,7 @@ int get_divide_ret()
         k = (k>>1);
     }
 
-    return (b*ant)%p;
+    return (b*ant)%p;          //b×（a的乘法逆元）
 }
 
 
