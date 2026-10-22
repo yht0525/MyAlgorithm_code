@@ -10,7 +10,7 @@ int n;
 struct node{
     int ne;
     int num;
-    vector<int> v;
+    vector<int> v;      //表示该节点的后继节点
 }arr[N];
 
 queue<node> qu;

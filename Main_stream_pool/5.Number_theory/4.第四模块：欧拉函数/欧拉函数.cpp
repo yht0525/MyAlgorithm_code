@@ -4,9 +4,10 @@ using namespace std;
 const int N = 1e5+10;
 //互质：a与b的gcd=1
 //欧拉函数：f(x) = 【1，x】中和x互质的数的个数
-//积性函数：f(x*y) = f(x) * f(y)
+//补充：phi(p ^ k) = (p-1) * p ^ (k-1)  -> p为质数
+//积性函数：f(x*y) = f(x) * f(y)    欧拉函数是积性函数 -> 前提为x，y互质
 
-//求每个数的欧拉函数
+//求每个数的欧拉函数(求单独的欧拉函数)
 int n;
 int get_num()
 {

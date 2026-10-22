@@ -31,7 +31,7 @@ void print(LL x)
     }
 
     if(x/10 > 0)print(x/10);
-    putchar(x%10 + '0');
+    putchar(x%10 + '0');        //必须要取模
 }
 
 int main()

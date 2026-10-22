@@ -1,70 +1,70 @@
-#include<iostream>
 #include<cstring>
 #include<vector>
+#include<iostream>
 using namespace std;
-
-const int N = 5050;
 const int INF = 0x3f3f3f3f;
+const int N = 1e3+10;
 
+//最小生成树 -> kk/prim
+
+int dist[N];
 struct node{
-    int p;
+    int to;
     int val;
 };
 
-vector<node> v[N];
 int n,m;
-
-int dist[N],st[N];
+vector<node> vec[N];
+int st[N];
 
 int prim()
 {
-    dist[1] = 0;
     int ret = 0;
-
+    dist[1] = 0;
+    
     for(int i=1;i<=n;i++)
-    {
-        int t = 0;
-        for(int j=1;j<=n;j++)
         {
-            if(!st[j] && dist[j] < dist[t])         //找最近点
-            {
-                t = j;
-            }
-        }
-
-        if(dist[t] == INF)return INF;
-        st[t] = true;
-        ret += dist[t];
-
-        for(auto j : v[t])                          //目标点到树的最短距离
-        {
-            int t1 = j.p;
-            int t2 = j.val;
+            int t = 0;
+            for(int i=1;i<=n;i++)
+                {
+                    if(dist[t] > dist[i] && !st[i]){
+                        t = i;
+                    }
+                }
+            //t即为当前选择的最短路径
+            if(dist[t] == 0x3f3f3f3f)return -1;
+            st[t] = true;
+            ret += dist[t];
             
-            dist[t1] = min(dist[t1] , t2);
+            for(auto v:vec[t])
+                {
+                    int tar = v.to;
+                    if(!st[tar] && dist[tar] > v.val){
+                        dist[tar] = v.val;
+                    }
+                }
         }
-    }
     return ret;
 }
 
 int main()
 {
-    memset(dist,INF,sizeof(dist));
-
     cin>>n>>m;
     for(int i=1;i<=m;i++)
-    {
-        int a,b,c;
-        cin>>a>>b>>c;
-         v[a].push_back({b,c});
-         v[b].push_back({a,c});
-    }
-
-    int ret = prim(); 
-    if(ret == INF){
-        cout<<"orz"<<endl;
+        {
+            int a,b,val;
+            cin>>a>>b>>val;
+            vec[a].push_back({b,val});
+            vec[b].push_back({a,val});
+        }
+    //初始化
+    memset(dist,0x3f,sizeof(dist));
+    
+    int k = prim();
+    if(k == 0x3f3f3f3f){
+        cout<<-1;
     }
     else{
-        cout<<ret<<endl;
+        cout<<k;
     }
 }

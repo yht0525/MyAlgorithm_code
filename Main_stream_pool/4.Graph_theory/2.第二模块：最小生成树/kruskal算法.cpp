@@ -37,7 +37,7 @@ int main()
     sort(arr+1 , arr+1+m ,cmp);
     int cnt = 0;
     int ret = 0;
-    for(int i=1;i<=m;i++)
+    for(int i=1;i<=m && cnt<n-1;i++)            //降低时间
     {
         int ta = arr[i].a;
         int tb = arr[i].b;
